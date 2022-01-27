@@ -10,25 +10,20 @@ import { ListItemIcon } from '@mui/material';
 import { ListItemText } from '@mui/material';
 import { Drawer } from '@mui/material';
 import Inventory2Icon from '@mui/icons-material/Inventory2';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import StarBorderIcon from '@mui/icons-material/StarBorder';
+import DeleteIcon from '@mui/icons-material/Delete';
+import RTL from '../Utilities/RTL'
 
-const theme = createTheme({
-  direction: 'rtl', // Both here and <body dir="rtl">
-});
-
-
-// Create rtl cache
-const cacheRtl = createCache({
-  key: 'muirtl',
-  stylisPlugins: [rtlPlugin],
-});
 
 
 const sidebarItems = [
   { key: 'mystorage', icon: <Inventory2Icon />, label: 'האחסון שלי' },
-  { key: 'shared', icon: <Inventory2Icon />, label: 'קבצים ששותפו איתי' },
-  { key: 'recent', icon: <Inventory2Icon />, label: 'לאחרונה' },
-  { key: 'favorites', icon: <Inventory2Icon />, label: 'מועדפים' },
-  { key: 'trash', icon: <Inventory2Icon />, label: 'אשפה' }
+  { key: 'shared', icon: <PeopleAltIcon />, label: 'קבצים ששותפו איתי' },
+  { key: 'recent', icon: <AccessTimeIcon />, label: 'לאחרונה' },
+  { key: 'favorites', icon: <StarBorderIcon />, label: 'מועדפים' },
+  { key: 'trash', icon: <DeleteIcon />, label: 'אשפה' }
 ]
 
 
@@ -45,7 +40,7 @@ export default function Sidebar() {
     setSelectedIndex(index);
   };
   return (
-    <div dir="rtl">
+    <div dir="">
       <Drawer
         anchor="right"
         variant="permanent"
@@ -55,9 +50,7 @@ export default function Sidebar() {
         }}
         open
       >
-        <CacheProvider value={cacheRtl}>
-          <ThemeProvider theme={theme}>
-            <ThemeProvider theme={theme}>
+        <RTL>
               <div>
                 <Toolbar />
                 <List sx={{ direction: 'rtl' }}>
@@ -72,21 +65,17 @@ export default function Sidebar() {
                           bgcolor: 'primary'
                         }
                       }}>
-                        <ListItemText
+                      <ListItemText
                         primary={item.label}
                       />
-                      <ListItemIcon>
+                      <ListItemIcon sx={{pr:2}}>
                         {item.icon}
                       </ListItemIcon>
-
-
                     </ListItem>
                   ))}
                 </List>
               </div>
-            </ThemeProvider>
-          </ThemeProvider>
-        </CacheProvider>
+              </RTL>
       </Drawer>
     </div>
 
