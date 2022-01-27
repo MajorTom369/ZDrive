@@ -9,7 +9,7 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <div dir='rtl' className="App">
       
         <Sidebar />
         
